@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>this is show contacts page</title>
+</head>
+<body>
+	<section>
+	
+	<!-- This is View Contacts Page -->
+		
+		<div class="card me-3 ms-3 bgc">  <!-- see style .css for bgc -->
+		
+			<div class="card-body">
+			
+				<h1 class="text-center">Your Contacts</h1>
+				
+				
+				<!-- Search functionality -->
+				
+				<div class="search-container my-3">
+				
+						<input onkeyup="search()" type="text" id="search-input" class="form-control" placeholder="Search your contacts">
+													<!-- onKeyup javascript function i.e. search() ko call kar raha hai, jo banaya gaya hai script.js mein -->
+													<!-- onKeyup ka matlab hai ke jaise he koi key press hogi searching start ho jaegi us key se related -->
+						<div class="search-result">  <!-- result dikhaya jayga javascript ki madad se --> <!-- backend me findByNameContainingAndUser() banaya gaya hai ContactRepository mein -->
+								<!-- result goes here -->								<!-- <h2>This is a search result</h2> css lagane se pehle agar hum <p> ko aise he chala denge to text upar aur table neeche khishak jayega
+																																				css lagakar hum result text ko table ke upar show kare denge
+																						<p> I'm into finding a way to generate Lorem ipsum </p> -->
+						</div>																		<!-- <h2> & <p> was used as dummy for testing how result will be shown-->
+				
+				</div>
+				
+				<!-- Table for contacts view  -->
+				
+				<div class="table-responsive">  <!-- it is made to make table responsive -->
+				
+						<table class="table table-striped table-bordered border-info table-hover text-center">
+							  
+							  <thead>
+								   
+								    <tr>
+								      <th scope="col">#ID</th>
+								      <th scope="col">Name</th>
+								      <th scope="col">Email</th>
+								      <th scope="col">Phone</th>
+								      <th scope="col">Action</th>
+								    </tr>
+								    
+							  </thead>
+							  
+							  <tbody>
+							    
+								    <tr th:each="c : ${contacts}">
+								    
+								      <th scope="row" th:text="${'SCMCONTACT '+c.cId}">1</th>	<!-- text ke sath append kiya hai contact ki id -->
+								    
+								      <td >
+								      
+								      		<img th:src="@{'/image/'+${c.image}}" class="my_profile_picture" alt="profile photo" src="">
+								      												<!-- '/image/' static url hai , fir ${c.image} contact i.e. c entity me se image variable se image ko fetch kiya gaya hai -->
+								      		 <span th:text="${c.name}"></span> <!-- <td th:text="${c.name}"></td> image show karane se pehle sirf itna he tha-->
+								      		 
+								      </td>
+								    
+								      <td >
+								      
+								      		<a th:href="@{'/user/'+${c.cId}+'/contact'}">
+								      			<span th:text="${c.email}"></span>
+								      		</a>		<!-- link lagane se pehle <td th:text="${c.email}"></td> -->
+								      
+								      </td>
+								     
+								      <td th:text="${c.phone}"></td>
+								      
+								      <td>
+								      
+								      		<form th:action="@{'/user/update-contact/'+${c.cId}}" method="post" class="mb-2">
+								      		
+								      				<button type="submit" class="btn btn-primary btn-sm">Update</button>
+								      						<!-- <a>tag bydefault Get leta hai, isliye isko form ke andar rakhkar post karaya ja raha
+								      							post security purpose se bhi better rehta hai. 
+								      							get laga ho to url se bhi hum link ko modify kar sakte hain, but post se sirf button se redirect hote hain
+								      						 -->
+								      		
+								      		</form>
+								      		
+								      		<!-- <a th:href="@{'/user/delete/'+${c.cId}}" class="btn btn-danger btn-sm">Delete</a> --> 
+								      													<!-- javascript ke delete alert lagane se pehle aise delete ho raha tha -->
+								      						
+								      		<a href="#" th:onclick=" | deleteContact(${c.cId}) | "  class="btn btn-danger btn-sm">Delete</a>
+								      					<!-- deleteContact() javascript function hai. isko banaya hai normal/base.html ke sabse neeche.
+								      						js function ko thymeleaf se aise he call karte hain || <- ye lagakar
+								      					 -->
+								      
+								      </td>
+								    
+								    </tr>
+							    
+							  
+							  </tbody>
+							  
+						</table>
+				
+				
+				</div>
+				
+
+				
+				<!-- Pagination Part -->
+				
+										<!-- Pagination ka matlab hoat hai ke agar bahut sare contacts ho, to ek samay par ek page par kitne
+							contacts dikhe, ye set kar sakte hain, aur pages ki list dikhegi jisko select karke baki ke contacts dekh sakte hain -->
+			
+				<nav aria-label="Page navigation example">
+					  
+					  <ul class="pagination">
+					  
+					    <li th:if="${currentPage != 0}" class="page-item">
+					    		<a th:href="@{'/user/show-contacts/'+${currentPage-1}}" class="page-link" href="#">Previous</a>
+					    </li>
+					    
+					    
+					    <li th:classappend="${currentPage==i-1?'active':''}" 
+					    	th:each="i : ${#numbers.sequence(1,totalPages)}" class="page-item">
+					    			<a th:href="@{'/user/show-contacts/'+${i-1}}" class="page-link" href="#"><span th:text="${i}"></span> </a>
+					    </li>
+					    					<!-- i = page ki value
+					    					url me 0 ka matlab page 1, url me 1 ka matlab page 2.....
+					    					th:each = 5-5 contacts ke hisab se 5 ke multiples me saare pages show honge, e.g 23 contacts honge to 5 pages show honge 
+					    						loop chal raha 1 se lekar jitne pages banenge utne tak aur usko i me store kara kar span me print kara liya.. jisse 1 2 3 4... pages ke list aayenge
+					    					classappend = jis page par ho wo highlight ho jayega
+					    					href = page par click karte he uske contacts dikh jaye. to single quote mko static kar diya gaya hai fir append kara ke dynamic kar diya
+					    						jaise... i=2 matlab humne pagination me 2 par click kiya to 2-1=1 to 1 url khul jayega
+					    					-->
+					    
+					    
+					    <li th:if="${currentPage+1 != totalPages}" class="page-item">
+					    		<a th:href="@{'/user/show-contacts/'+${currentPage+1}}" class="page-link" href="#">Next</a>
+					    </li>
+					  						<!-- th:if =   next kab nahi dikhe = last page ki value aur url ki value jab match ho jaye
+					  											eg. last page 2 hai, aur uspar jate he url 1 rahega, to next ko gayab karna hai
+					  											pagination ke currentPage page par + 1 add karne ke totalPages ki value match ho rahi to matlab hua ke abhi last page par nahi hai aur next dikaani hai
+					  								href= url par 1 hai, to next par click karte he uspar 1 add ho jayega aur next page par chala jayega
+					  						 -->
+					  </ul>
+					  
+				</nav>
+			
+			</div>
+		
+		</div>
+		
+		
+			<!-- This javascript with jquerry is made to make sidebar link active on click-->
+				<script>
+
+						$(document).ready(() => {
+							$('.item').removeClass('active');		/* isse agar sidebar ke class me active likha bhi hoga to remove kar dega */
+							$('#contacts-link').addClass('active');	/* ab usko home par active kar diya */
+							});
+						
+
+				</script>
+		
+		
+	</section>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="normal/base::layout(~{::section})">
+	<head>
+		<meta charset="UTF-8">
+		<title>this is about page</title>
+	</head>
+	
+	<body>
+		<section>
+														<!-- It has input fields for Contact.java -->
+														<!-- Is Form mein text aur image format bhi save ho raha hai -->
+			<div class="card me-4 ms-3 bgc">  							<!-- me is for margin-right(e-end) & ms is for margin-left(s-start)-->
+																							<!-- see style.css for bgc -->
+					
+							   	
+							   	<!-- Form Starts -->
+					
+					<div class="card-body">
+					
+							<h1 class="text-center">Add Contact</h1>
+							
+							<div class="container-fluid mt-1">
+							
+									<div class="row">
+									
+											<div class="col-md-8 offset-md-2">
+											
+													<form th:object="${contact}"  
+															 th:action="@{/user/process-contact}" 
+															  method="post" action="#" 
+															  enctype="multipart/form-data"  
+															  class="mt-2"
+															>				<!-- image bhi fetch hogi isliye enctype lagaya gaya hai-->
+													
+															<!-- First Name -->
+															
+															<div class="input-group">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fa fa-plus"></i>
+																		
+																	</div>
+																	
+																	<input required type="text" id="firstName" name="name" placeholder="Enter Name here" class="form-control">
+															
+															</div>
+															
+															<!-- Second Name -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fas fa-user-alt"></i>
+																																			
+																	</div>
+																	
+																	<input required type="text" id="secondName" name="secondName" placeholder="Enter Nickname here" class="form-control">
+															
+															</div>
+															
+															<!-- Phone Field -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fa fa-phone"></i>
+																																			
+																	</div>
+																	
+																	<input required  minlength="10" maxlength="15" 
+																			 type="text" id="phone" name="phone" 
+																			 placeholder="Enter Phone Number with 10-15 digits" class="form-control"
+																		> 				<!-- minlength="10" and maxlength="15" → Restricts input length. -->
+															
+															</div>
+															
+															<!-- Email Field -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<span>@</span>
+																																			
+																	</div>
+																	
+																	<input type="text" id="email" name="email" placeholder="Enter EmailId here" class="form-control">
+															
+															</div>
+															
+															<!-- Work Field -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fa fa-briefcase"></i>
+																																			
+																	</div>
+																	
+																	<input required type="text" id="work" name="work" placeholder="Enter Work here" class="form-control">
+															
+															</div>
+															
+															<!-- Contact Description -->
+															
+															<div class="input-group mt-3">
+															  
+															  <span class="input-group-text"><i class="fa-solid fa-pen-to-square"></i></span>
+															  <textarea class="form-control" name="dscription" placeholder="Enter your description" aria-label="With textarea"></textarea>
+															
+															</div>
+															
+															<!-- Contact Image Field -->
+															
+															<div class="custom-file mt-3">		
+																	
+																	<label for="formFile" class="form-label">Upload profile picture </label>
+																	<input type="file" name="profileImage" placeholder="Contact's Image">
+																			<!-- html name attribute aur Entity class ke variable name se match hona chahiye
+																			par yahan image ko alag se upload karana hai isliye alag name diya gaya hai
+																			-->
+																	
+															</div>
+															
+															
+															<div class="container text-center mt-2">
+															
+																	<button class="btn btn-outline-primary">Save Contact</button>
+															
+															</div>
+															
+													
+													</form>
+											
+											</div>
+									
+									</div>
+							
+							</div>
+					
+					 </div>
+			
+			</div>
+		
+		
+			<!-- This javascript with jquerry is made to make sidebar link active on click-->
+				<script>
+
+						$(document).ready(() => {
+							$('.item').removeClass('active');		/* isse agar sidebar ke class me active likha bhi hoga to remove kar dega */
+							$('#add-link').addClass('active');	/* ab usko home par active kar diya */
+							});
+						
+
+				</script>
+		
+		
+		</section>
+	</body>
+</html>

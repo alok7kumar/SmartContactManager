@@ -1,0 +1,179 @@
+/* Base.html */
+
+body{
+	background: #e2e2e2 !important; 
+}
+
+.bg-primary{
+	background: #009688 !important; 						/* set navbar background color green */
+}
+
+.banner{ /* for background photo in home */
+	width: 100%;
+	height: 93vh;
+	background: linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.8)) ,url(../image/banner.jpg);
+											/* linear-gradient will overlay image with dark color, as (0,0,0) will make color black & .8 is intensity */ 
+				 							/* ../ will send you to root directory i.e static, then image folder, then banner */				
+	background-size:cover;		/* it will set whole image into div */
+	color:white;						/* it will set text color inside photo */
+}
+
+
+.my-card{							/* signup.html ke Success/Failure msg ke upar */
+	padding: 20px;				/*  upar se neeche le taraf shift karega div ko */
+	background: #ffffff;	/* div ke background ko white kar dega */
+}
+
+/* Styling fo about page */
+
+ .hero-section {
+            background-color: #eef1ff;
+            padding: 60px 0;
+        }
+        .feature-icon {
+            font-size: 40px;
+            color: #4b68ff;
+        }
+        .testimonial {
+            background-color: #ffffff;
+            border-left: 5px solid #4b68ff;
+            padding: 20px;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+
+/* Login Form */
+
+.signin-form {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: #F5FFFA;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #86b7fe;
+        }
+        .register-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        
+  /* background color of all content page under contact after user login */
+  
+  .bgc{
+   background-color: #F5FFFA;   /* Mint Cream */
+  }
+  
+
+/* 	Sidebar & Content style (normal/base.html)		*/
+
+
+@media only screen and (max-width: 600px)	{		
+	/* Responsive banane le liye. ye styling tabhi apply hogi jab screen ki width ya to 600px tak ho ya usse kam */
+	 	.sidebar{
+			display: none;
+			width: 80% !important; 					
+			background: #F0FFF0;
+			height: 100vh;
+			position: fixed; 								/* iske wajah se sidebar hatega nahi apne jagah se */
+			padding-top: 20px;
+		}  /* Note: Chhote screen par sidebar puri tarah hide ho jayega, isko apne marzi se hataane aur laane ke liye 
+				javascript use kiya gaya hai, see static->js->script.js file */	
+		
+		.content{
+			margin-left: 0% !important;	/* content ka starting hoga left ka 20% chhodkar, taki us jagah sidebar aa sake */
+		}
+}
+
+.sidebar{
+	width: 18%; 								 	/* design aisa hai page ka thoda hissa (18%) sidebar lega aur baki content(80%).  */
+	background: #F0FFF0;
+	height: 100%;
+	position: fixed; 								/* iske wajah se sidebar hatega nahi apne jagah se */
+	padding-top: 45px;
+	z-index: 9999999999999999999999; /* isse sidebar content ke upar dikhne lagega, jab screen chhota hoga, cross ko click karne baad */
+}
+
+.sidebar a{
+	display: block;								/* block hone se height width asani se adjust kar sakte hain */
+	width: 100%;									/* as much parent sidebar */
+	 padding: 10px 25px;						/* 10 is from top-bottom and 25 from right-left */
+	text-decoration: none;					/* <a> tag ke kaaran underline text aata hai, usko hata dega */
+	color: grey;									/* text color */
+}
+
+.sidebar a:hover{
+	background: #e2e2e2;					/* cursor options par le jaate he dark area ho jayega */
+	
+}
+
+.sidebar .divider{								/* It will create a line below all options */
+	height: .5px;
+	width: 100%;
+	background: #e2e2e2;
+	margin-top: 10%;
+}
+
+.content{
+	margin-left: 20%;							/* content ka starting hoga left ka 20% chhodkar, taki us jagah sidebar aa sake */
+}
+
+.sidebar .crossBtn{	
+	position: absolute;							/* iska matlab isme sara kaam parent ke relative he hoga */
+	top:0;
+	right: 35px;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+/* styling for showing profile picture in view contacts. of show_contacts.html */
+
+.my_profile_picture{
+	width: 30px;
+	height: 30px;
+	object-fit: cover; 						/* isse photo stretched nahi rahega proper fit ho jayega */
+	border-radius:50%;					/* isse photo circular dikhega */
+}
+
+/* to make sidebar link active on click */
+.active{
+	background-color: #009688 !important;
+	color: white !important;
+}
+/* sidebar ke partcular link tabhi active hoga jab wo partcular page par click karenge.
+	jaise jab Home tab active hoga, matlab user-dashboard wala page chal raha hoga, to usi page ke section ke andar he sabse neeche 
+	<script> likhenge jisse ye dynamically click hone par active hota rahe...
+	Yahi script har sidebar ke page par laga hai, aur sabko id di gayi hai script ke andar as a selector i.e. home-link,add-link,etc
+	
+ */
+
+
+
+/* search css , placed inside show_contacts.html */
+
+.search-container{
+	position: relative;
+}
+
+.search-result{
+	position: absolute;     /*ye lagane se table ke upar show karne lagega result */  /* search result apne parent(search-container) ke according badal sakte hain, */
+	background: white;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid gray;
+	display: none;	/* abhi tak demo text dikh raha tha, par kyuki ye hamesha nahi dikhana hai, to display ko none kar diya gaya hai.
+							js lagakar isko dynamic banakr seach result  show karte wakt display block karenge  */
+}
+
+
+
+
+
+
+
+

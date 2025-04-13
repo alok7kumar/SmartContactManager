@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>this is about page</title>
+</head>
+<body>
+	<section>
+						<!-- This is Home Page for Contact -->
+		
+				<div class="container">
+				
+						<div class="card  bgc"> <!--  see style.css for bgc-->
+						
+								<div class="card-body my-5">
+								
+										<div class="container text-center">
+												<img th:src="@{'/image/contact_logo.png'}" style="height:150px; width:150px;" class="my_profile_picture"  alt="profile photo" src="">
+										</div>
+										
+										<h1 class="text-center text-secondary fst-italic fw-light">
+												Start Adding your contact on Cloud. . . 
+										</h1>
+										
+										<div class="d-grid gap-2">
+												<a th:href="@{/user/add_contact}" class="btn btn-primary text-uppercase mt-4">Add New Contact</a>
+										</div>
+										
+								</div>
+						
+						</div>
+				
+				</div>
+				
+				<!-- This javascript with jquerry is made to make sidebar link active on click-->
+				<script>
+
+						$(document).ready(() => {
+							$('.item').removeClass('active');		/* isse agar sidebar ke class me active likha bhi hoga to remove kar dega */
+							$('#home-link').addClass('active');	/* ab usko home par active kar diya */
+							});
+						
+
+				</script>
+		
+		
+	</section>
+</body>
+</html>

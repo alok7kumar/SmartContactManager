@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>this is about page</title>
+</head>
+<body>
+	<section>
+		
+					<!-- Iss form ko banaya gaya hai taki view contacts ke andar jab jayenge to kuch detail show honge, fir wahan jab email ko 
+						click karenge to bache huye details dikh jayenge
+					 -->
+		
+			<div class="card ms-3 me-3">
+			
+					<div class="card-body">
+					
+							<div class="container text-center">
+					
+									<img th:src="@{'/image/'+${contact.image}}" style="height:200px; width:200px;" class="my_profile_picture"  alt="profile photo" src="">
+					
+									<h3 class="mt-3">
+									
+										<span th:text="${contact.name}"> </span>	(	<span th:text="${contact.secondName}"></span>	) 
+										
+									</h3>
+									
+									
+									<table class="table">
+										  <thead>
+										    <tr>
+										      <th scope="col">#ID</th>
+										      <th scope="col">SCMCONTACT<span th:text="${contact.cId}"></span> </th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										    <tr>
+										      <th scope="row">Email</th>
+										      <td><span th:text="${contact.email}"></span> </td>
+										    </tr>
+										    
+										     <tr>
+										      <th scope="row">Phone</th>
+										      <td><span th:text="${contact.phone}"></span> </td>
+										    </tr>
+										    
+										     <tr>
+										      <th scope="row">Work</th>
+										      <td><span th:text="${contact.work}"></span> </td>
+										    </tr>
+										    
+										  </tbody>
+										  
+									</table>
+									
+									
+									<div class="container mt-3">
+									
+										<th:block th:text="${contact.dscription}"></th:block>
+									
+									</div>
+									
+									
+									<div class="container mt-3 d-grid gap-2 ">
+									
+									 	<!-- Update button ke liye form ko copy kar ke laya gaya hai show_contacts.html se -->
+										<form th:action="@{'/user/update-contact/'+${contact.cId}}" method="post" class="mb-2 d-grid gap-2">
+						      		
+						      				<button type="submit" class="btn btn-primary btn-sm">Update</button>
+						      		
+						      			</form>
+										
+						      			<button th:onclick=" | deleteContact(${contact.cId}) | " class="btn btn-danger btn-sm ">Delete</button>
+									
+									</div>
+					
+							</div>
+					
+					</div>
+			
+			</div>
+
+	</section>
+</body>
+</html>

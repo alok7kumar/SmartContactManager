@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Settings page</title>
+</head>
+<body>
+	<section>
+		
+				<div class="container mt-3" >
+				
+						<div class="row ">
+						
+								<div class="col-md-6 offset-md-3"> <!-- offset lagane se center me aa gaya div, 3 grid left se aur 3 grid right se -->
+								
+										<div class="card shadow-sm">
+										
+												<div class="card-body text-center bgc"> 
+												
+														<h3 class="mb-3">Change User's Password</h3>
+														
+														<form th:action="@{/user/change-password}" method="post">
+														
+															<!-- old password field -->
+															
+															<div class="form-group mb-4">
+															
+																<input name="oldPassword" type="text" class="form-control" placeholder="Enter old password" >
+															
+															</div>
+															
+															<!-- new password field -->
+															
+															<div class="form-group mb-5">
+															
+																<input name="newPassword" type="text" class="form-control" placeholder="Enter new password" >
+															
+															</div>
+															
+															<div class="container text-center">
+															
+																	<button type="submit" class="btn btn-success me-4">CHANGE</button>
+																	<button type="reset" class="btn btn-warning">RESET</button>
+															
+															</div>
+														
+														</form>
+												
+												</div>
+										
+										</div>
+								
+								</div>
+						
+						</div>
+				
+				</div>	
+		
+		
+				
+				<!-- This javascript with jquerry is made to make sidebar link active on click-->
+				<script>
+
+						$(document).ready(() => {
+							$('.item').removeClass('active');		/* isse agar sidebar ke class me active likha bhi hoga to remove kar dega */
+							$('#settings-link').addClass('active');	/* ab usko home par active kar diya */
+							});
+						
+
+				</script>
+		
+		
+	</section>
+</body>
+</html>

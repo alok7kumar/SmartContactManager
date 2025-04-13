@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>this is about page</title>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="row">	<!-- bootstrap row ke andar colums bante hain. har ek row ke paas 12 grids hoti hai. -->
+				<div class="col-md-6 offset-md-3">
+						<!-- is column me ek size ke 6 grids bann rahe hai. medium aur medium ke upar ki devices(screens) ke liye. Screens ke types Mobile, Smaller, Medium, Large to Medium
+									* grid lagane ke baad 6 grid bach jaygi. to offset 3 grid ko shift kar dega(3 left aur 3 right mein.)
+						 -->
+						 
+					<div class="my-card mt-2" style="background-color: #F5FFFA;">		<!-- margin-top form ke div ko jo white me hai, navbar se neeche shift kar dega -->
+					
+						<!-- Success/Failure Alert Message -->
+						
+							   	<div  th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+							   								<!-- th:classappend: jo humne error ka color decide kiya hai session ke message ke liye,
+							   								 ye usko dynamically choose karke accordingly display karega  -->
+								  	<p class="text-center" th:text="${session.message.content}"></p>	<!-- isse message print hoga -->
+								  
+								  
+								  
+								   <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+								  			<!-- Isse message display hone ke baad hat jayega . See sessionHelper.java in com.smart.Helper-->
+								  
+								  </div>
+								  
+					
+						<div class="container text-center">
+							<img  style="width: 50px;" alt="" src="" th:src="@{/image/register.png}">  <!-- image downloaded from flaticon.com -->
+						</div>
+					
+						<h1 class="text-center">Register Here !!</h1>
+						
+						<form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}">
+						
+							<!-- name field -->
+							
+							<div class="mb-3">
+							    <label for="name_field" class="form-label">Your Name</label>
+							    <input 
+							    	name="name"
+							    	type="text" 
+								    class="form-control " 
+								    th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+								    id="name_field" 
+								    aria-describedby="emailHelp"
+								    placeholder="Enter name here"
+								    required
+								    th:value="${user.name}" 		
+								    >			<!-- th:value se submit ke baad bhi data show karega -->
+								    
+								    <!-- For validation in fields -->
+								    <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}" >
+								      
+								    </div>
+								    
+  							</div>
+  							
+  							<!-- Email field -->
+							
+							<div class="mb-3">
+							    <label for="email_field" class="form-label">Your Email</label>
+							    <input 
+							    	name="email"
+							    	type="email" 
+								    class="form-control" 
+								    id="email_field" 
+								    aria-describedby="emailHelp"
+								    placeholder="name@gmail.com"
+								    required
+								    th:value="${user.email}"
+								    >
+  							</div>
+  							
+  							<!-- password field -->
+							
+							<div class="mb-3">
+							    <label for="password_field" class="form-label">Your Password</label>
+							     <input 
+							     	name="password"
+							    	type="password" 
+								    class="form-control" 
+								    id="password_field" 
+								    aria-describedby="emailHelp"
+								    placeholder="Enter password here"
+								    required
+								    >
+  							</div>
+  							
+  							<!-- user - about field -->
+  							
+  							<div class="form-floating">
+  								
+  								<textarea th:text="${user.about}" name="about"  rows="10"  class="form-control" placeholder="Write something about yourself"></textarea>
+  								<label for="floatingTextarea" >Write something about yourself....</label><!--  th:value="${user.about}" -->
+  								
+  							</div>
+  							
+  							<!-- Terms and Conditions -->
+  							
+  							<div class="form-group form-check mt-2">
+  							
+  								<input
+  									type="checkbox"
+  									name="agreement"
+  									class="form-check-input"
+  									id="agreement"
+  									>
+  								<label for="agreement">Accept terms and conditions</label>
+  							
+  							</div>
+  							
+  							<div class="container  text-center mt-4">
+  							
+  								<button type="submit" class="btn bg-primary text-white">Submit</button>
+  								
+  								<button type="reset" class="btn btn-warning text-white">Reset</button>
+  							
+  							</div>
+  							
+						</form>
+						
+						 <div class="register-link">
+				            <p class="mt-3 mb-0">Already Registered ? <a th:href="@{/login}">Sign In here !!</a></p>
+				        </div>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

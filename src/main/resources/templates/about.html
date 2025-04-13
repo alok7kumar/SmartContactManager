@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>this is about page</title>
+
+</head>
+<body>
+
+	<section>
+		
+		
+			<!-- Hero Section -->
+			<div class="hero-section text-center">
+			    <div class="container">
+			        <h1 class="display-5 fw-bold">About Smart Contact Manager</h1>
+			        <p class="lead mt-3">Your personal and secure contact management system. Manage your connections effortlessly.</p>
+			    </div>
+			</div>
+			
+			<!-- Features Section -->
+			<div class="container py-5">
+			    <div class="row text-center g-4">
+			       
+			        <div class="col-md-4">
+			            <div class="feature-icon mb-3">
+			                📁
+			            </div>
+			            <h5>User Account System</h5>
+			            <p>Create your personal account and enjoy secure access to your contact dashboard.</p>
+			        </div>
+			        
+			        <div class="col-md-4">
+			            <div class="feature-icon mb-3">
+			                📇
+			            </div>
+			            <h5>Contact Management</h5>
+			            <p>Add, edit, and manage multiple contacts per user with full customization.</p>
+			        </div>
+			        
+			        <div class="col-md-4">
+			            <div class="feature-icon mb-3">
+			                🔒
+			            </div>
+			            <h5>Secure & Private</h5>
+			            <p>All your data is encrypted and accessible only to you. We value your privacy.</p>
+			        </div>
+			        
+			    </div>
+			
+			    <!-- Extra Section: Why Choose Us -->
+			    <div class="mt-5 text-center">
+			        <h4>Why Choose SmartContactManager?</h4>
+			        <p class="text-muted mx-auto" style="max-width: 700px;"> <!-- text-muted -> Makes the text appear lighter or "muted"—typically a grayish color. -->
+			            Our platform is designed for individuals and professionals who want a simple yet powerful way to organize their contacts. Whether you're a freelancer, entrepreneur, or just want to keep your life organized — SCM is your go-to solution.
+			        </p>
+			    </div>
+			
+			    <!-- Testimonial -->
+			    <div class="testimonial mx-auto mt-4" style="max-width: 700px;">
+			        “I've tried multiple contact managers, but this one stands out for its simplicity and clean design. I love how I can securely store and organize all my client info in one place!”
+			        <div class="text-end mt-2 fw-bold">— Alok Kumar</div>
+			    </div>
+			    
+			</div>
+			
+			<!-- Call to Action -->
+			<!-- <div class="text-center py-5 bg-light">
+			    <div class="container">
+			        <h3 class="mb-3">Ready to simplify your contact life?</h3>
+			        <p class="mb-4">Sign up now and start managing your contacts like a pro.</p>
+			        <a href="/register" class="btn btn-primary btn-lg">Create an Account</a>
+			    </div>
+			</div> -->
+
+		
+		
+		
+		<!-- FOOTER AREA STARTS-->
+    
+    
+			    <!-- Footer -->
+			<footer class="bg-primary text-white pt-5 pb-4 mt-5">
+			
+			  <div class="container text-start">
+			    <div class="row justify-content-between gx-5"> <!-- gx-5: Adds horizontal gutters (space between columns). -->
+			
+			      <!-- Company Info -->
+			      <div class="col-md-3 col-lg-3 col-xl-3 mb-4 text-center"> <!--  col-*-3 —> Column Width on Different Devices -->
+			        <h5 class="text-uppercase fw-bold mb-4">SmartContactManager</h5>
+			        <p>Your secure personal contact organizer. Easily manage, access, and edit your contacts on the go.</p>
+			      </div>
+			
+			      <!-- Quick Links -->
+			      <div class="col-md-2 col-lg-2 col-xl-2 mb-4 text-center">
+			        <h6 class="text-uppercase fw-bold mb-4">Quick Links</h6>
+			        <p><a  th:href="@{/}" class="text-white text-decoration-none">Home</a></p>
+			        <p><a th:href="@{/about}" class="text-white text-decoration-none">About</a></p>
+			        <p><a th:href="@{/signup}" class="text-white text-decoration-none">Register</a></p>
+			        <p><a th:href="@{/login}" class="text-white text-decoration-none">Sign In</a></p>
+			      </div>
+			
+			      <!-- Resources -->
+			      <div class="col-md-3 col-lg-2 col-xl-2 mb-4 text-center">
+			        <h6 class="text-uppercase fw-bold mb-4">Resources</h6>
+			        <p><a href="#" class="text-white text-decoration-none">Privacy Policy</a></p>
+			        <p><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></p>
+			        <p><a href="#" class="text-white text-decoration-none">FAQs</a></p>
+			        <p><a href="#" class="text-white text-decoration-none">Help Center</a></p>
+			      </div>
+			
+			      <!-- Contact Info -->
+			      <div class="col-md-4 col-lg-3 col-xl-3 mb-4 text-center">
+			        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+			        <p><i class="bi bi-house-fill me-2"></i> Varanasi, India</p>
+			        <p><i class="bi bi-envelope-fill me-2"></i> support@smartcm.dummy</p>
+			        <p><i class="bi bi-telephone-fill me-2"></i> +91 9000000000</p>
+			        <p><i class="bi bi-globe me-2"></i> www.smartcm.dummy</p>
+			      </div>
+			
+			    </div>
+			
+			    <!-- Horizontal line -->
+			    <hr class="mb-4 mt-4">
+			
+			    <!-- Footer Bottom -->
+			    <div class="row align-items-center">
+			      <div class="col-md-7 col-lg-8">
+			        <p class="mb-0 text-white">© 2025 SmartContactManager. All Rights Reserved.</p>
+			        <p class="text-white">Designed & Developed by <strong>ALOK KUMAR</strong></p>
+			      </div>
+			
+			      <div class="col-md-5 col-lg-4 text-center text-md-end">
+			       <!-- These are icons, to show this bootstrap icons link is added in base.html -->
+			        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+			        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+			        <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+			        <a href="#" class="text-white"><i class="bi bi-github"></i></a>
+			      </div>
+			    </div>
+			    
+			  </div>
+			</footer>
+		
+		  <!-- FOOTER ENDS -->
+		
+	</section>
+</body>
+</html>

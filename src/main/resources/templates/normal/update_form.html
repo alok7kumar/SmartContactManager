@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+					th:replace="normal/base::layout(~{::section})">
+	<head>
+		<meta charset="UTF-8">
+		<title>this is about page</title>
+	</head>
+	
+	<body>
+	
+		<section>
+			
+				<div class="card me-4 ms-3">  							<!-- me is for margin-right(e-end) & ms is for margin-left(s-start)-->
+			
+					
+							   	
+							   	<!-- Form Starts -->
+					
+					<div class="card-body">
+					
+							<h1 class="text-center">Update Your Contact</h1>
+							
+							<div class="container-fluid mt-1">
+							
+									<div class="row">
+									
+											<div class="col-md-8 offset-md-2">
+											
+													<form th:object="${contact}"  
+															 th:action="@{/user/process-update}" 
+															  method="post" action="#" 
+															  enctype="multipart/form-data"  
+															  class="mt-2"
+															>				<!-- image bhi fetch hogi isliye enctype lagaya gaya hai-->
+													
+													
+														<!-- Contact Image Field -->
+															
+															<div class="container text-center">
+															
+																	<img th:src="@{'/image/'+${contact.image}}" style="width: 200px; height: 200px;" class="img-fluid my_profile_picture" alt="" src="">
+															
+															</div>
+															
+															<div class="custom-file mb-3">
+															
+																	<label>Change profile picture </label>
+																	<input type="file" name="profileImage" placeholder="Contact's Image">
+																			<!-- html name attribute aur Entity class ke variable name se match hona chahiye
+																			par yahan image ko alag se upload karana hai isliye alag name diya gaya hai
+																			-->
+		
+															</div>
+													
+																<!-- Hidden Form field to generate Contact Id -->
+															<input type="hidden" th:value="${contact.cId}" name="cId">  
+													
+													
+															<!-- First Name -->
+															
+															<div class="input-group">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fa fa-plus"></i>
+																		
+																	</div>
+																	
+																	<input th:value="${contact.name}" required type="text" id="firstName" name="name" placeholder="Enter Name here" class="form-control">
+															
+															</div>
+															
+															<!-- Second Name -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fas fa-user-alt"></i>
+																																			
+																	</div>
+																	
+																	<input th:value="${contact.secondName}" required type="text" id="secondName" name="secondName" placeholder="Enter Nickname here" class="form-control">
+															
+															</div>
+															
+															<!-- Phone Field -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fa fa-phone"></i>
+																																			
+																	</div>
+																	
+																	<input required  minlength="10" maxlength="15" 
+																			 th:value="${contact.phone}"
+																			 type="text" id="phone" name="phone" 
+																			 placeholder="Enter Phone Number with 10-15 digits" class="form-control"
+																		> 				<!-- minlength="10" and maxlength="15" → Restricts input length. -->
+															
+															</div>
+															
+															<!-- Email Field -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<span>@</span>
+																																			
+																	</div>
+																	
+																	<input th:value="${contact.email}" type="text" id="email" name="email" placeholder="Enter EmailId here" class="form-control">
+															
+															</div>
+															
+															<!-- Work Field -->
+															
+															<div class="input-group mt-3">
+															
+																	<div class="input-group-text">
+																	
+																					<i class="fa fa-briefcase"></i>
+																																			
+																	</div>
+																	
+																	<input th:value="${contact.work}" required type="text" id="work" name="work" placeholder="Enter Work here" class="form-control">
+															
+															</div>
+															
+															<!-- Contact Description -->
+															
+															<div class="input-group mt-3">
+															  
+															  <span class="input-group-text"><i class="fa-solid fa-pen-to-square"></i></span>
+															  <textarea th:text="${contact.dscription}" class="form-control" name="dscription" placeholder="Enter your description" aria-label="With textarea"></textarea>
+															
+															</div>
+															
+														
+															
+															
+															<div class="container text-center mt-2">
+															
+																	<button class="btn btn-outline-primary">Save Contact</button>
+															
+															</div>
+															
+													
+													</form>
+											
+											</div>
+									
+									</div>
+							
+							</div>
+					
+					 </div>
+			
+			</div>
+			
+			
+		</section>
+		
+	</body>
+	
+</html>

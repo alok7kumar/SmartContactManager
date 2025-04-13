@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+									th:fragment="layout(content)">
+<!-- {content} in th:replace(see <body>) is the dynamic variable which will come from th:fragment 
+	Kuch certain areas hote hain page mein eg.Header,Footer jo hum baar baar nahi banana chahte, To thymeleaf Inheritance 
+	ks use karke Header Footer ko ek page par aasani se laa sakte hain.
+	<html> me th:fragment ke andar ek variable pass hua i.e (content) hai jo hame dynamic content add karayega.
+	Header page agar bana hai, to uske <html>  th:replace="base::layout(~{::section})" use karte he yahan is page ke body me wo section aa jayga, 
+	kyuki <body> me th:replace laga hai. 
+	Note: tilde(~) ke baad jo bhi tag likha hai, wahi as a dynamic content (content) variable ke andar store hoga. 
+-->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${title}">base html</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+	    rel="stylesheet" 
+	    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+	    crossorigin="anonymous">
+	    
+	  <!-- Font_Awesome  -->
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+		  integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+		  crossorigin="anonymous" 
+		  referrerpolicy="no-referrer" />
+	    
+	 <link rel="stylesheet" th:href="@{/css/style.css}"> <!-- for linking css file present in static folder -->
+	 
+	  <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+  
+		   <!-- NavBar Starts --> 
+		   
+		 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-body-tertiary bg-primary">
+		  <div class="container-fluid">
+		    <a class="navbar-brand" href="#">Smart Contact Manager</a>
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    
+		      <ul class="navbar-nav ms-auto text-uppercase mb-2 mb-lg-0">	<!--  me-auto changed to ms-auto. It shifted Options to right -->
+		        
+		        <li class="nav-item">
+		          <a class="nav-link active" aria-current="page" th:href="@{/}" href="#">Home</a>
+		        </li>
+		        
+		        <li class="nav-item">
+		          <a class="nav-link"   aria-disabled="true"><span th:text="${user.name}"></span> </a>
+		        </li>							<!-- It will fetch user name from db in navbar after successful login -->
+		        
+		        <li class="nav-item">
+		          <a class="nav-link " aria-disabled="true" th:href="@{/logout}">Logout</a>
+		        </li>
+		      </ul>
+		      
+		    </div>
+		  </div>
+		</nav>
+				<!-- End NavBar -->
+				
+				
+				<!-- Now, below NavBar, Page is divided into two parts: sideBar on left and Content on right, SideBar base.html me isliye banaya gaya hai taaki normal ke andar jitne bhi pages banenege wo isko inherit karega aur directly sidebar dikhta rahega -->
+				
+				
+				<!-- Side Bar starts -->  
+				
+												<!-- Sidebar yahan isliye bana hai taki jitni bhi user se related page bane ,wo is sidebar ko inherit kar le -->
+   
+				<div class="sidebar mt-2 "> 
+				
+						<span onclick="toggleSidebar()" class="crossBtn">&times;</span>	<!-- It will generate cross sign ,which is placed at top-right corner of sidebar -->
+																								<!-- onclick is javascript function(script.js) to open/close cross -->
+						<a id="home-link" class="item" th:href="@{/user/index}">
+								<i class="fas fa-home"></i>				Home</a>
+											<!-- id of each sidebar menu is used to make tab active on click by jquery on below of each page, see more on style.css-> .active{}-->
+						<a id="contacts-link" class="item" th:href="@{/user/show-contacts/0}">	
+								<i class="fas fa-id-card-alt"></i>		View Contacts</a>
+								
+						<a id="add-link" class="item" th:href="@{/user/add_contact}">		
+								<i class="fas fa-pencil-alt"></i>		Add Contacts</a>
+								
+						<a id="profile-link" class="item" th:href="@{/user/profile}">				
+								<i class="fas fa-user-circle"></i>	Your Profile</a>
+								
+						<a id="settings-link" class="item" th:href="@{/user/settings}">															
+								<i class="fas fa-cogs"></i>				Settings</a>
+								
+						<a class="item" th:href="@{/logout}">							
+								<i class="fas fa-sign-out-alt"></i	>	Logout</a>
+						
+						<div class="divider"></div>
+				
+				</div>
+   				
+   				<!-- Side Bar ends -->
+   				
+   				
+   				
+   				
+   				
+   				
+   				<!-- Content area -->
+   				
+   				<div class="content mt-5">
+   				
+   						<i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+   																			<!-- onclick is javascript function(script.js) to open/close menu-three-line -->
+   						
+   						
+   						<!-- Success/Failure Alert Message -->
+						
+						<div th:if="${session.message}" class="container" >
+						
+								<div   th:classappend="${'alert-'+session.message.type}" class="alert" role="alert">
+							   								<!-- th:classappend: jo humne error ka color decide kiya hai session ke message ke liye,
+							   								 ye usko dynamically choose karke accordingly display karega  -->
+								  		<p class="text-center" th:text="${session.message.content}"></p>	<!-- isse message print hoga -->
+								  
+								  <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+								  			<!-- Isse message display hone ke baad hat jayega . See sessionHelper.java in com.smart.Helper-->
+								  
+								 </div>
+								
+						
+						</div>
+   						
+   						
+   						
+   						<div th:replace="${content}"></div>		 <!-- yahan par user_dashboard.html ka content aa jayega -->
+   				
+   				</div>
+    
+    			<!-- Content area ENDS-->
+    
+    
+    
+    
+    <!-- Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+	    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+	    crossorigin="anonymous">
+    </script>
+    
+   
+    
+    <!-- own js file -->
+    <script th:src="@{/js/script.js}"></script> <!-- for linking javascript file present in static folder -->
+    
+    <!-- sweet alert cdn link . for confirmation popup before deleting 
+    			(isko copy kiya gaya hai 		https://sweetalert.js.org/guides/ 	 se)-->
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>  <!-- CDN link -->
+    
+    <!-- Code for popup alert for deleting msg -->
+    <script type="text/javascript">
+
+			function deleteContact(cid) {   /* isko call kiya hai show_contacts.html ke delete me */
+
+				swal({
+					  title: "Are you sure?",
+					  text: "You want to delete this contact . . .?",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((willDelete) => {
+					  if (willDelete) {
+							window.location="/user/delete/"+cid;
+					  } else {
+					    swal("Your contact is safe . . .!");
+					  }
+					});
+				
+				
+			}
+    
+    </script>
+    
+    
+    
+  </body>
+</html>
