@@ -60,9 +60,8 @@ http://localhost:8081
 
 ## 📸 Screenshots
 
-![Login Page](![login](https://github.com/user-attachments/assets/d877b63b-d741-4c00-bfd1-5d3ac907fecc)
-)
-![User Dashboard](![viewcontacts](https://github.com/user-attachments/assets/03d832ad-d0b3-445c-bd79-44eeb34f23a7)
-)
+![login](https://github.com/user-attachments/assets/d877b63b-d741-4c00-bfd1-5d3ac907fecc)
+
+![viewcontacts](https://github.com/user-attachments/assets/03d832ad-d0b3-445c-bd79-44eeb34f23a7)
 
 
