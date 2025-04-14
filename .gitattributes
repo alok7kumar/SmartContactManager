@@ -1,2 +1,17 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+
+# Tell GitHub to prioritize Java for language stats
+*.java linguist-detectable=true
+
+# Ignore HTML, CSS, JS for language detection
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+*.json linguist-detectable=false
+*.xml linguist-detectable=false
+*.png linguist-detectable=false
+*.jpg linguist-detectable=false
+*.jpeg linguist-detectable=false
+*.svg linguist-detectable=false
+
